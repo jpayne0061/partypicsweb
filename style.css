@@ -1,90 +1,167 @@
+body {
+  margin: 0;
+  width: 100%;
+  background-color: #3e3e42;
+}
+
+.app-wrapper {
+  font-size: 16px;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
 #video {
-    border: 1px solid black;
-    box-shadow: 2px 2px 3px black;
-    width: 320px;
-    height: 240px;
-  }
-  
-  #photo {
-    border: 1px solid black;
-    box-shadow: 2px 2px 3px black;
-    width: 320px;
-    height: 240px;
-  }
-  
-  #canvas {
-    display: none;
-  }
-  
-  .camera {
-    max-width: 500px;
-    display: inline-block;
-  }
-  
-  .output {
-    width: 340px;
-    display: inline-block;
-    vertical-align: top;
-  }
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px black;
+  /* width: 320px; */
+  /* height: 240px; */
+  max-width: 95vw;
+}
 
-  .button {
-    width: 320px;
-    background-color: #4CAF50; /* Green background */
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    padding: 15px 32px; /* Some padding */
-    text-align: center; /* Centered text */
-    text-decoration: none; /* No underline */
-    display: inline-block; /* Use inline-block */
-    font-size: 16px; /* Set font size */
-    margin: 4px 2px; /* Add some margin */
-    cursor: pointer; /* Change mouse cursor on hover */
-    border-radius: 8px; /* Rounded corners */
-    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for background and shadow */
-  }
-  
-  .button:hover {
-    background-color: #45a049; /* Darker shade of green */
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Add shadow on hover */
-  }
-  
-  .button:active {
-    background-color: #3e8e41; /* Even darker shade of green */
-    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2) inset; /* Inset shadow for a pressed effect */
-  }
-  
-  
-  .contentarea {
-    font-size: 16px;
-    font-family: "Lucida Grande", "Arial", sans-serif;
-    width: 760px;
-  }
-  
+#addPhoto {
+  position: fixed;
+  z-index: 200;
+  bottom: 20;
+  right: 20;
+  width: 8rem;
+  height: 8rem;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  background-color: #9386e6;
+  border: 1px solid #c1fda0;
+  box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.7);
+  font-size: 7rem;
+}
 
+#photo {
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px black;
+  width: 320px;
+  height: 240px;
+}
+
+#streamdiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+#canvas {
+  display: none;
+  width: 100vw;
+}
+
+#imagesContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 95vw;
+  gap: 0.5rem;
+}
+
+.camera {
+  /* max-width: 500px; */
+  width: 100%;
+  display: inline-block;
+}
+
+.photo {
+  border-radius: 4px;
+}
+
+.output {
+  /* width: 340px; */
+  /* display: inline-block; */
+  /* vertical-align: top; */
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: none;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.button {
+  width: 320px;
+  background-color: #4caf50; /* Green background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 15px 32px; /* Some padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* No underline */
+  display: inline-block; /* Use inline-block */
+  font-size: 16px; /* Set font size */
+  margin: 4px 2px; /* Add some margin */
+  cursor: pointer; /* Change mouse cursor on hover */
+  border-radius: 8px; /* Rounded corners */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for background and shadow */
+}
+
+.button:hover {
+  background-color: #45a049; /* Darker shade of green */
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+.button:active {
+  background-color: #3e8e41; /* Even darker shade of green */
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2) inset; /* Inset shadow for a pressed effect */
+}
+
+.input {
+  line-height: 40px;
+  width: 320px;
+  display: flex;
+}
+
+.input-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* @media (max-width: 699px) {
   .input {
-    line-height: 40px;
-    width: 320px;
+    line-height: 60px;
+    width: 95%;
     display: block;
   }
 
+  .button {
+    width: 95%;
+    height: 90px;
+    font-size: 40px;
+  }
 
-
-  @media (max-width: 699px) {
-
-    .input {
-        line-height: 60px;
-        width: 95%;
-        display: block;
-      }
-
-      .button{
-        width: 95%;
-        height: 90px;
-        font-size: 40px;
-      }
-
-        .camera {
-            width: 95%;
-        }
-
-}
+  .camera {
+    width: 95%;
+  }
+} */
