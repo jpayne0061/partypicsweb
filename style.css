@@ -11,7 +11,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 0.2rem;
   min-height: 100vh;
 }
 
@@ -33,8 +33,10 @@ body {
 #addPhoto {
   position: fixed;
   z-index: 200;
-  bottom: 20;
-  right: 20;
+  top: 90%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   width: 8rem;
   height: 8rem;
   outline: none;
@@ -87,6 +89,30 @@ body {
   /* width: 340px; */
   /* display: inline-block; */
   /* vertical-align: top; */
+}
+
+.image-card {
+  /* position: absolute; */
+  background-color: #fff;
+  padding: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.upvote-button {
+  height: 4rem;
+}
+
+.image-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vote-display {
 }
 
 .loader {
