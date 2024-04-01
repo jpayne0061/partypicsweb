@@ -105,14 +105,70 @@
 
         container.replaceChildren();
 
-        data.forEach((base64Image) => {
+        data.forEach((image) => {
+          const picId = image.picInfo?.picId;
+          const picGuid = image.picInfo?.picGuid;
+          const party = image.picInfo?.party;
+          const numOfPoints = image.picInfo?.numberOfPoints || 0;
+
+          const imageCard = document.createElement("div");
+          imageCard.classList.add("image-card");
+
+          console.log("image", image);
           const img = document.createElement("img");
-          img.src = `${base64Image}`;
-          // img.style.display = "block";
+          img.src = `${image.file}`;
           img.classList.add("photo");
-          container.appendChild(img);
+
+          const upVoteButton = document.createElement("button");
+          upVoteButton.innerText = "UPVOTE";
+          upVoteButton.classList.add("upvote-button");
+          upVoteButton.addEventListener("click", () =>
+            handleUpVote(picId, picGuid, party)
+          );
+
+          const voteDisplayContainer = document.createElement("div");
+          voteDisplayContainer.classList.add("vote-container");
+
+          const voteDisplay = document.createElement("div");
+          voteDisplay.classList.add("vote-display");
+          voteDisplay.id = picGuid;
+          voteDisplay.textContent = numOfPoints;
+
+          const voteText = document.createElement("div");
+          voteText.textContent = "UPVOTES: ";
+
+          voteDisplayContainer.appendChild(voteText);
+          voteDisplayContainer.appendChild(voteDisplay);
+
+          const imageFooter = document.createElement("div");
+          imageFooter.classList.add("image-footer");
+
+          imageCard.appendChild(img);
+          imageFooter.appendChild(voteDisplayContainer);
+          imageFooter.appendChild(upVoteButton);
+          imageCard.appendChild(imageFooter);
+
+          container.appendChild(imageCard);
         });
       }
+
+      const handleUpVote = async (picId, picGuid, party) => {
+        const voteDisplay = document.getElementById(picGuid);
+
+        voteDisplay.textContent = +voteDisplay.textContent + 1;
+
+        await fetch(`${serverUrl}/Vote`, {
+          method: "PUT",
+          headers: {
+            accept: "*/*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            picId,
+            partyName: party,
+          }),
+        });
+      };
 
       function createParty() {
         passcode = document.getElementById("createpartypasscodeinput").value;
