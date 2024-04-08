@@ -32,7 +32,7 @@ body {
 
 #addPhoto {
   position: fixed;
-  z-index: 200;
+  /* z-index: 200; */
   top: 90%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -68,6 +68,20 @@ body {
   width: 100vw;
 }
 
+#nav-bar {
+  display: none;
+  /* overflow: hidden; */
+  background-color: #333;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #3e3e42;
+  color: white;
+}
+
 #imagesContainer {
   display: flex;
   flex-direction: column;
@@ -75,10 +89,18 @@ body {
   gap: 0.5rem;
 }
 
+.downvote-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
 .camera {
   /* max-width: 500px; */
   width: 100%;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .photo {
@@ -102,6 +124,12 @@ body {
 }
 
 .upvote-button {
+  height: 4rem;
+}
+
+.downvote-button {
+  display: none;
+
   height: 4rem;
 }
 
