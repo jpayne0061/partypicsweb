@@ -1,4 +1,4 @@
-let serverUrl = "http://localhost:5242";
+let serverUrl = "https://partypics.azurewebsites.net";
 
 let passcode = "";
 
