@@ -33,19 +33,33 @@ body {
 #addPhoto {
   position: fixed;
   /* z-index: 200; */
-  top: 90%;
-  left: 50%;
+  top: 15%;
+  left: 85%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 8rem;
-  height: 8rem;
+  width: 6rem;
+  height: 6rem;
   outline: none;
   border: none;
   border-radius: 50%;
-  background-color: #9386e6;
-  border: 1px solid #c1fda0;
+  background-color: whitesmoke;
+  border: 1px solid #9386e6;
   box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.7);
-  font-size: 7rem;
+  font-size: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+#addPhoto:hover,
+#addPhoto:active {
+  transform: scale(0.9);
+  box-shadow: 0px 12px 8px -8px rgba(0, 0, 0, 0.7);
+}
+
+.placeholder {
+  height: 40px;
 }
 
 #photo {
@@ -125,12 +139,13 @@ body {
 
 .upvote-button {
   height: 4rem;
+  touch-action: manipulation;
 }
 
 .downvote-button {
   display: none;
-
   height: 4rem;
+  touch-action: manipulation;
 }
 
 .image-footer {

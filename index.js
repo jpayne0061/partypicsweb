@@ -13,6 +13,8 @@ let photo = null;
 let startbutton = null;
 let nav = null;
 let photos = [];
+let facingMode = "user";
+let cameraFlip = null;
 
 let userInfo = window.localStorage.getItem("dumprInfo")
   ? JSON.parse(window.localStorage.getItem("dumprInfo"))
@@ -77,6 +79,11 @@ function renderPhotos() {
 
   container.replaceChildren();
 
+  const placeholder = document.createElement("div");
+  placeholder.classList.add("placeholder");
+
+  container.appendChild(placeholder);
+
   photos.forEach((image) => {
     const picId = image.picInfo?.picId;
     const picGuid = image.picInfo?.picGuid;
@@ -86,7 +93,6 @@ function renderPhotos() {
     const imageCard = document.createElement("div");
     imageCard.classList.add("image-card");
 
-    console.log("image", image);
     const img = document.createElement("img");
     img.src = `${image.file}`;
     img.classList.add("photo");
@@ -254,6 +260,28 @@ function showViewLiveResultButton() {
   return false;
 }
 
+function startCamera(facingMode) {
+  navigator.mediaDevices
+    .getUserMedia({ video: { facingMode: facingMode }, audio: false })
+    .then((stream) => {
+      video.srcObject = stream;
+      video.play();
+    })
+    .catch((err) => {
+      console.error(`An error occurred: ${err}`);
+    });
+}
+
+function toggleCameraDirection() {
+  if (facingMode === "user") {
+    facingMode = "environment";
+    startCamera(facingMode);
+  } else {
+    facingMode = "user";
+    startCamera(facingMode);
+  }
+}
+
 function startup() {
   if (showViewLiveResultButton()) {
     return;
@@ -265,16 +293,11 @@ function startup() {
   startbutton = document.getElementById("startbutton");
   upvoteDisplay = document.getElementById("lifetime-upvotes");
   nav = document.getElementById("nav-bar");
+  cameraFlip = document.getElementById("flip-camera");
 
-  navigator.mediaDevices
-    .getUserMedia({ video: true, audio: false })
-    .then((stream) => {
-      video.srcObject = stream;
-      video.play();
-    })
-    .catch((err) => {
-      console.error(`An error occurred: ${err}`);
-    });
+  cameraFlip.addEventListener("click", toggleCameraDirection);
+
+  startCamera(facingMode);
 
   video.addEventListener(
     "canplay",
@@ -324,6 +347,9 @@ function takepicture() {
 
     const data = canvas.toDataURL("image/png");
 
+    document.getElementById("streamdiv").style.display = "none";
+    showLoader(true);
+
     fetch(serverUrl + "/Pics", {
       method: "POST",
       headers: {
@@ -337,10 +363,16 @@ function takepicture() {
     })
       .then((response) => response.json())
       .then((data) => {
+        showLoader(false);
+
         photos = data;
         renderPhotos();
       })
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => {
+        alert("FAILED TO POST PIC :(. Try again?");
+        document.getElementById("streamdiv").style.display = "flex";
+        console.error("Error:", error);
+      });
 
     photo.setAttribute("src", data);
   } else {
