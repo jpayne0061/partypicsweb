@@ -10,6 +10,16 @@
       <div class="main-content">
         <span id="loader" class="loader"></span>
         <div id="logo" style="font-size: 1.5rem; color: white">DUMPR</div>
+        <div id="passcodeinput" class="input-pair">
+          <input
+            class="input"
+            type="text"
+            id="passcodeInput"
+            name="passcode"
+            placeholder="Passcode"
+          />
+          <button onclick="joinParty()" class="button">Join Party</button>
+        </div>
         <div id="createpartypasscode" class="input-pair">
           <input
             class="input"
@@ -26,16 +36,7 @@
             Create Party
           </button>
         </div>
-        <div id="passcodeinput" class="input-pair">
-          <input
-            class="input"
-            type="text"
-            id="passcodeInput"
-            name="passcode"
-            placeholder="Passcode"
-          />
-          <button onclick="joinParty()" class="button">Join Party</button>
-        </div>
+       
         <button onclick="showStream()" id="addphoto" style="display: none">
           <div>  
             <svg fill="#000000" height="70px" width="70px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
