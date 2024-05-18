@@ -166,8 +166,9 @@ function renderPhotos() {
   container.appendChild(interfaceContainer);
 
   photos.forEach((image) => {
+    console.log(image);
     const picId = image.picInfo?.picId;
-    const picGuid = image.picInfo?.picGuid;
+    const picGuid = image.picInfo?.picGuid?.trim();
     const party = image.picInfo?.party;
     const numOfPoints = image.picInfo?.numberOfPoints || 0;
 
@@ -224,7 +225,7 @@ function renderPhotos() {
 }
 
 const handleUpVote = async (picId, picGuid, party) => {
-  const voteDisplayForPic = document.getElementById(picGuid);
+  const voteDisplayForPic = document.getElementById(picGuid.trim());
   const lifetime = document.getElementById("lifetime-upvotes");
   const downVotesLeftDisplay = document.getElementById("downvotes-left");
 
@@ -258,7 +259,7 @@ const handleUpVote = async (picId, picGuid, party) => {
 };
 
 async function handleDownVote(picId, picGuid, party) {
-  const votesForPic = document.getElementById(picGuid);
+  const votesForPic = document.getElementById(picGuid?.trim());
   const downVotesLeft = document.getElementById("downvotes-left");
   const lifeTimeDownvoteDisplay = document.getElementById("lifetime-downvotes");
 
