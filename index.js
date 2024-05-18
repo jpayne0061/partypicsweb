@@ -60,6 +60,70 @@ function joinParty() {
     });
 }
 
+function refreshPhotos(passcode) {
+  const container = document.getElementById("imagesContainer");
+
+  container.replaceChildren();
+
+  showLoader(true);
+  fetch(serverUrl + "/Pics?passcode=" + passcode, {
+    method: "GET",
+    headers: {
+      accept: "text/plain",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      photos = data;
+      showLoader(false);
+      renderPhotos();
+    })
+    .catch((error) => {
+      alert("Whoopsy! failed to get them pitchers");
+      showLoader(false);
+      document.getElementById("createpartypasscode").style.display = "flex";
+      document.getElementById("passcodeinput").style.display = "flex";
+      console.error("Error fetching images:", error);
+    });
+}
+
+function addSwipeDownToRefresh(element, callback) {
+  let startY;
+  let endY;
+  let threshold = 100; // Minimum swipe distance to trigger the refresh
+
+  element.addEventListener("touchstart", (event) => {
+    if (element.scrollTop === 0) {
+      startY = event.touches[0].clientY;
+    }
+  });
+
+  element.addEventListener("touchmove", (event) => {
+    if (startY !== undefined) {
+      endY = event.touches[0].clientY;
+    }
+  });
+
+  element.addEventListener("touchend", () => {
+    if (startY !== undefined && endY !== undefined) {
+      let distance = endY - startY;
+      if (distance > threshold) {
+        callback();
+      }
+    }
+    // Reset the values
+    startY = undefined;
+    endY = undefined;
+  });
+}
+
+// Usage
+// const refreshableElement = document.getElementById("refreshable");
+// addSwipeDownToRefresh(refreshableElement, () => {
+//   alert("Refreshed!");
+//   // Add your refresh logic here
+// });
+
 function showStream() {
   document.getElementById("streamdiv").style.display = "flex";
 
@@ -71,7 +135,11 @@ function showStream() {
 function renderPhotos() {
   addphoto.style.display = "block";
 
-  document.getElementById("imagesContainer").style.display = "flex";
+  const imagesContainer = document.getElementById("imagesContainer");
+
+  addSwipeDownToRefresh(imagesContainer, () => refreshPhotos(passcode));
+
+  imagesContainer.style.display = "flex";
   document.getElementById("passcodeinput").style.display = "none";
   document.getElementById("streamdiv").style.display = "none";
 
