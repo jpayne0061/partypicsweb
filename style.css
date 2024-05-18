@@ -4,6 +4,44 @@ body {
   background-color: #3e3e42;
 }
 
+.interface-container {
+  height: 5rem;
+  width: 90vw;
+  margin-top: 1rem;
+  display: flex;
+}
+
+.interface-button {
+  flex: 1;
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.interface-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.interface-button:active {
+  background-color: #003f7f;
+  transform: translateY(0);
+}
+
+.interface-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
 .app-wrapper {
   font-size: 16px;
   font-family: "Lucida Grande", "Arial", sans-serif;
@@ -129,9 +167,9 @@ body {
 
 .image-card {
   /* position: absolute; */
-  background-color: #fff;
+  background-color: slategray;
   padding: 0.5rem;
-
+  color: white;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -140,12 +178,34 @@ body {
 .upvote-button {
   height: 4rem;
   touch-action: manipulation;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .downvote-button {
   display: none;
   height: 4rem;
   touch-action: manipulation;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .image-footer {

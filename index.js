@@ -127,17 +127,13 @@ function addSwipeDownToRefresh(element, callback) {
 function showStream() {
   document.getElementById("streamdiv").style.display = "flex";
 
-  document.getElementById("addphoto").style.display = "none";
-
   document.getElementById("imagesContainer").style.display = "none";
 }
 
 function renderPhotos() {
-  addphoto.style.display = "block";
-
   const imagesContainer = document.getElementById("imagesContainer");
 
-  addSwipeDownToRefresh(imagesContainer, () => refreshPhotos(passcode));
+  // addSwipeDownToRefresh(imagesContainer, () => refreshPhotos(passcode));
 
   imagesContainer.style.display = "flex";
   document.getElementById("passcodeinput").style.display = "none";
@@ -147,10 +143,27 @@ function renderPhotos() {
 
   container.replaceChildren();
 
+  const interfaceContainer = document.createElement("div");
+  interfaceContainer.classList.add("interface-container");
+
+  const refreshButton = document.createElement("button");
+  refreshButton.addEventListener("click", () => refreshPhotos(passcode));
+  refreshButton.classList.add("interface-button");
+  refreshButton.innerText = "REFRESH";
+
+  const postPhotoButton = document.createElement("button");
+  postPhotoButton.addEventListener("click", showStream);
+  postPhotoButton.classList.add("interface-button");
+  postPhotoButton.innerText = "TAKE DUMP";
+
+  interfaceContainer.appendChild(refreshButton);
+  interfaceContainer.appendChild(postPhotoButton);
+
   const placeholder = document.createElement("div");
   placeholder.classList.add("placeholder");
 
   container.appendChild(placeholder);
+  container.appendChild(interfaceContainer);
 
   photos.forEach((image) => {
     const picId = image.picInfo?.picId;
@@ -302,8 +315,6 @@ function createParty() {
       document.getElementById("createpartypasscode").style.display = "none";
 
       document.getElementById("passcodeinput").style.display = "none";
-
-      document.getElementById("addphoto").style.display = "block";
     })
     .catch((error) => {
       alert("Whoopsy, failed to create party!");
