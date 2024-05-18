@@ -312,6 +312,7 @@ function createParty() {
   })
     .then((data) => {
       showLoader(false);
+      renderPhotos();
       document.getElementById("createpartypasscode").style.display = "none";
 
       document.getElementById("passcodeinput").style.display = "none";
